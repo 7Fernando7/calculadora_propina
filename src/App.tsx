@@ -1,13 +1,17 @@
+import { useReducer } from 'react'
 import MenuItem from './components/MenuItem'
 import OrderContent from './components/OrderContent'
 import OrderTotals from './components/OrderTotals'
 import TipPercentageForm from './components/TipPercentageForm'
 import { menuItems } from './data/db'
 import useOrder from './hooks/useOrder'
+import { initialState, OrderReducer } from './reducers/order-reducer'
 
 function App() {
 
-  const { order, addItem, removeItem, tip, setTip, placeOrder } = useOrder()
+  const { order, removeItem, tip, setTip, placeOrder } = useOrder()
+
+  const [state, dispatch ] = useReducer(OrderReducer, initialState)
 
 
   return (
@@ -25,7 +29,7 @@ function App() {
               <MenuItem
                 key={item.id}
                 item={item}
-                addItem={addItem}
+                dispatch={dispatch}
               />
             ))}
           </div>
