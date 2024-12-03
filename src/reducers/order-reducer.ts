@@ -3,7 +3,9 @@ import { MenuItem, OrderItem } from "../types";
 
 export type OrderActions = 
     { type: 'add-item', payload: {item : MenuItem} } |
-    { type: 'remove-item', payload: { item : MenuItem['id'] } } |
+    { type: 'remove-item', payload: {
+        id: number; item : MenuItem['id'] 
+} } |
     { type: 'place-order'} |
     { type: 'set-tip', payload: { value : number} }
 
@@ -44,8 +46,11 @@ export type OrderActions =
             }
 
             if(action.type === 'remove-item') {
+
+                const order = state.order.filter( item => item.id !== action.payload.id)
                 return { 
                     ...state,
+                    order
                 }
             }
 
