@@ -61,8 +61,11 @@ export type OrderActions =
             }
 
             if(action.type === 'set-tip') {
+
+                const tip = action.payload.value
                 return { 
                     ...state,
+                    tip,
                 }
             }
             return state
